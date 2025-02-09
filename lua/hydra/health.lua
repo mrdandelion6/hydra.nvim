@@ -1,7 +1,5 @@
 local M = {}
 
-vim.health.report_start("Hydra: Checking settings")
-
 local function check_timeoutlen_option()
 	-- check timeoutlen
 	if vim.o.timeoutlen < 300 then
@@ -10,17 +8,18 @@ local function check_timeoutlen_option()
             make each mapping working!
             It's recommended to use %d for the `timeoutlen` option!
         ]]
-		vim.health.report_warn(message:format(vim.o.timeoutlen, 300))
+		vim.health.warn(message:format(vim.o.timeoutlen, 300))
 	else
 		local message = [[
             `timeoutlen` (value: %d) is set to a good value.
         ]]
 
-		vim.health.report_ok(message:format(vim.o.timeoutlen))
+		vim.health.ok(message:format(vim.o.timeoutlen))
 	end
 end
 
 M.check = function()
+	vim.health.start("Hydra: Checking settings")
 	check_timeoutlen_option()
 end
 
